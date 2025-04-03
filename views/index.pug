@@ -58,6 +58,8 @@ body
               let data = await response.json();
               if (response.ok) {
                   alert("E-mail enviado com sucesso!");
+                   // 🔹 Apagar os campos do formulário
+                  document.getElementById("contactForm").reset();
 
                   let mensagem = `Olá, meu nome é ${nome}, meu e-mail é ${email} e meu telefone é ${telefone}. Gostaria de mais informações!`;
                   let urlWhatsApp = `https://api.whatsapp.com/send?phone=5581994518370&text=${encodeURIComponent(mensagem)}`;
