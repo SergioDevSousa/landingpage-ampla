@@ -1,52 +1,63 @@
-require('dotenv').config();
-const express = require('express');
-const nodemailer = require('nodemailer');
-const path = require('path');
+const express = require("express");
+const nodemailer = require("nodemailer");
+const path = require("path");
+require("dotenv").config();
 
 const app = express();
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+// Configurar o Express para usar Pug como template engine
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
-// Configuração do Nodemailer
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+// Middleware para processar JSON e dados de formulário
+app.use(express.json()); // Para JSON
+app.use(express.urlencoded({ extended: true })); // Para formulários
+
+// Servir arquivos estáticos (CSS, JS, imagens, etc.), se necessário
+app.use(express.static("public"));
+
+// 🔹 Rota para exibir o formulário
+app.get("/", (req, res) => {
+    res.render("index"); // Certifique-se de que tem um arquivo "views/index.pug"
+});
+
+
+
+app.post("/enviar-email", async (req, res) => {
+    try {
+        console.log("Recebendo dados:", req.body); // Log para debug
+        const { nome, email, telefone } = req.body;
+
+        if (!nome || !email || !telefone) {
+            return res.status(400).json({ error: "Todos os campos são obrigatórios!" });
+        }
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            secure: process.env.SMTP_SECURE === "true",
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_TO,
+            subject: `Novo Contato: ${nome}`,
+            text: `Nome: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}`
+        };
+
+        let info = await transporter.sendMail(mailOptions);
+        console.log("E-mail enviado:", info.response);
+        res.status(200).json({ message: "E-mail enviado com sucesso!" });
+
+    } catch (error) {
+        console.error("Erro ao enviar e-mail:", error);
+        res.status(500).json({ error: "Erro ao enviar e-mail", details: error.message });
     }
 });
 
-// Rota para exibir a Landing Page Mobile
-app.get('/', (req, res) => {
-    res.render('mobile');
-});
-
-// Rota para capturar e enviar o e-mail
-app.post('/capturar-lead', (req, res) => {
-    const { nome, email, telefone } = req.body;
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_TO,
-        subject: 'Novo Lead do Site!',
-        text: `Novo lead cadastrado:\n\nNome: ${nome}\nE-mail: ${email}\nTelefone: ${telefone}`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Erro ao enviar e-mail:', error);
-            res.send("<h2>Ocorreu um erro. Tente novamente!</h2>");
-        } else {
-            console.log('E-mail enviado:', info.response);
-            res.send("<h2>Obrigado! Em breve entraremos em contato.</h2>");
-        }
-    });
-});
-
-// Iniciar o servidor
-app.listen(3000, () => {
-    console.log('Servidor rodando em http://localhost:3000');
-});
+// Inicia o servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));

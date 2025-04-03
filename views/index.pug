@@ -1,0 +1,76 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Ampla TecServ
+    link(rel="stylesheet", href="/styles.css")
+  
+body
+    .container
+      .logo
+        img(src="/image/logo-ampla.png" alt="Logo da Empresa")
+
+      h1 🚀 Automatize Seu Negócio Agora!  
+      p Controle suas vendas, estoque e financeiro de forma fácil e rápida.  
+
+      .cta
+        form(id="contactForm" action )
+          input(type="text" name="nome" id="nome" placeholder="Seu Nome" required)
+          input(type="email" name="email" id="email" placeholder="seuemail@email.comSeu E-mail" required)
+          input(type="tel" name="telefone" id="telefone" placeholder="(00)00000-0000" required)
+          button(type="submit") Enviar via Whatsapp!
+
+      .benefits
+        h2 ✅ Benefícios do Nosso Software  
+        ul
+          li 📊 Controle total das finanças  
+          li 🚀 Agilidade no atendimento  
+          li 🏪 Estoque sempre atualizado  
+          li 💰 Aumento de faturamento  
+
+      .testimonials
+        h2 💬 O que nossos clientes dizem?
+        .testimonial
+          p "Esse software mudou minha empresa! Agora tudo está mais organizado e eficiente."
+          span - João Silva, Dono de Supermercado
+
+        .testimonial
+          p "A automação facilitou muito minha gestão financeira. Super recomendo!"
+          span - Maria Souza, Loja de Roupas  
+    script.
+      document.getElementById("contactForm").addEventListener("submit", async function(event) {
+          event.preventDefault();
+
+          let nome = document.getElementById("nome").value;
+          let email = document.getElementById("email").value;
+          let telefone = document.getElementById("telefone").value;
+
+          let formData = { nome, email, telefone };
+
+          try {
+              let response = await fetch("/enviar-email", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(formData)
+              });
+
+              let data = await response.json();
+              if (response.ok) {
+                  alert("E-mail enviado com sucesso!");
+
+                  let mensagem = `Olá, meu nome é ${nome}, meu e-mail é ${email} e meu telefone é ${telefone}. Gostaria de mais informações!`;
+                  let urlWhatsApp = `https://api.whatsapp.com/send?phone=5581994518370&text=${encodeURIComponent(mensagem)}`;
+                  window.open(urlWhatsApp, "_blank");
+              } else {
+                  alert("Erro: " + data.error);
+              }
+
+
+          } catch (error) {
+              console.error("Erro ao enviar:", error);
+              alert("Erro ao enviar mensagem. Tente novamente!");
+          }
+      });
+    footer
+        p © 2025 - Ampla TecServ | Todos os direitos reservados.
