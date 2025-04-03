@@ -17,7 +17,7 @@ Este projeto foi desenvolvido usando **Pug (HTML simplificado), CSS responsivo e
 
 ## 🎨 **Preview do Projeto**  
 
-![Preview da Landing Page](https://via.placeholder.com/800x400?text=Landing+Page+Preview)  
+![Preview da Landing Page](/public/image/resposividade.png)  
 
 ---
 

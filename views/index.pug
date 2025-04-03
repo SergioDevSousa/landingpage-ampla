@@ -35,15 +35,46 @@ body
           li 🏪 Estoque sempre atualizado  
           li 💰 Aumento de faturamento  
 
-      .testimonials
-        h2 💬 O que nossos clientes dizem?
-        .testimonial
-          p "Esse software mudou minha empresa! Agora tudo está mais organizado e eficiente."
-          span - João Silva, Dono de Supermercado
+        .testimonials
+            h2 💬 O que nossos clientes dizem?
+            .testimonial
+              p#testimonial-text Depoimentos carregando...
 
-        .testimonial
-          p "A automação facilitou muito minha gestão financeira. Super recomendo!"
-          span - Maria Souza, Loja de Roupas  
+      script.
+        // 🔹 Animação de Depoimentos Digitados
+        const testimonials = [
+          "Esse software mudou minha empresa! Agora tudo está mais organizado e eficiente.",
+          "A automação facilitou muito minha gestão financeira. Super recomendo!",
+          "Com esse sistema, economizei tempo e aumentei meu faturamento!"
+        ];
+
+        let index = 0;
+        let textIndex = 0;
+        let speed = 50; // Velocidade da digitação
+        let currentText = "";
+
+        function typeEffect() {
+          if (textIndex < testimonials[index].length) {
+            currentText += testimonials[index][textIndex];
+            document.getElementById("testimonial-text").innerHTML = currentText;
+            textIndex++;
+            setTimeout(typeEffect, speed);
+          } else {
+            setTimeout(nextTestimonial, 2000); // Espera 2s antes do próximo depoimento
+          }
+        }
+
+        function nextTestimonial() {
+          textIndex = 0;
+          currentText = "";
+          index = (index + 1) % testimonials.length;
+          document.getElementById("testimonial-text").innerHTML = "";
+          setTimeout(typeEffect, 500);
+        }
+
+        typeEffect(); // Inicia a animação
+
+
     script.
       document.getElementById("contactForm").addEventListener("submit", async function(event) {
           event.preventDefault();
@@ -79,6 +110,8 @@ body
               console.error("Erro ao enviar:", error);
               alert("Erro ao enviar mensagem. Tente novamente!");
           }
+      
       });
+      
     footer
         p © 2025 - Ampla TecServ | Todos os direitos reservados.
