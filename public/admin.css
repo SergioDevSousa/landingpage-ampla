@@ -1,0 +1,675 @@
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Wrapper para o layout */
+  .wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f7f8fa;
+  }
+  
+  /* Menu Lateral */
+  .sidebar {
+    width: 260px;
+    background-color: #34495e;
+    color: white;
+    padding: 30px 20px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+  }
+  
+  /* Logo da Sidebar */
+  .sidebar .logo img {
+    width: 100%;
+    max-width: 180px;
+    margin-bottom: 40px;
+    display: block;
+  }
+  
+  /* Links do Menu Lateral */
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 15px;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s, padding-left 0.3s;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #2980b9;
+    padding-left: 20px;
+  }
+  
+  /* Área de Conteúdo */
+  .main-content {
+    margin-left: 260px;
+    padding: 40px;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+  }
+  
+  /* Cabeçalho */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #eee;
+    margin-bottom: 30px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+  
+  .header p {
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  
+  /* Seções */
+  .section {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .section h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .section p {
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  
+  /* Formulários */
+  form {
+    margin-top: 20px;
+  }
+  
+  form input[type="file"], form textarea, form button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Estilo para a seção de Gerenciar Logo */
+  #manageLogo {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  #manageLogo h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  #manageLogo form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  #manageLogo label {
+    font-size: 16px;
+    color: #2c3e50;
+  }
+  
+  #manageLogo input[type="url"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 8px;
+    transition: border-color 0.3s ease;
+  }
+  
+  #manageLogo input[type="url"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 3px rgba(52, 152, 219, 0.4);
+  }
+  
+  #manageLogo button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 20px;
+  }
+  
+  #manageLogo button[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+  
+  #manageLogo button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+  }
+  
+  
+  /* Estilo para a seção de Gerenciar Benefícios */
+  .section#manageBenefits {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .section#manageBenefits h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .section#manageBenefits form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .section#manageBenefits label {
+    font-size: 16px;
+    color: #2c3e50;
+  }
+  
+  .section#manageBenefits input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #333;
+    background-color: #f5f5f5;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .section#manageBenefits input[type="text"]:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .section#manageBenefits button[type="submit"] {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .section#manageBenefits button[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+  
+  .section#manageBenefits input:invalid {
+    border-color: #e74c3c;
+  }
+  
+  .section#manageBenefits input:valid {
+    border-color: #2ecc71;
+  }
+  
+  
+  /* Estilo para o botão "Salvar Alterações" */
+  .save-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 20px;
+    align-self: flex-start;
+    transition: background-color 0.3s;
+  }
+  
+  .save-btn:hover {
+    background-color: #2ecc71;
+  }
+  
+  /* Lista de Benefícios */
+  .benefits-list {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .benefits-list h3 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .benefits-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .benefits-list ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .benefits-list ul li span {
+    font-size: 16px;
+    color: #2c3e50;
+  }
+  
+  .benefits-list ul li button.remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .benefits-list ul li button.remove-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 1024px) {
+    .sidebar {
+      width: 220px;
+    }
+  
+    .main-content {
+      margin-left: 220px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: static;
+      box-shadow: none;
+    }
+  
+    .main-content {
+      margin-left: 0;
+    }
+  
+    .header h1 {
+      font-size: 24px;
+    }
+  
+    .header p {
+      font-size: 14px;
+    }
+  
+    .section h2 {
+      font-size: 20px;
+    }
+  
+    form input[type="file"], form textarea, form button {
+      font-size: 14px;
+    }
+  }
+  
+  /* Estilos para a seção de Gerenciar Depoimentos */
+  .section#manageTestimonials {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .section#manageTestimonials h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Estilo para o Formulário de Depoimentos */
+  .section#manageTestimonials form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .section#manageTestimonials label {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+  
+  /* Estilo para o Input de Depoimento */
+  .section#manageTestimonials input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #333;
+    background-color: #f5f5f5;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  /* Efeito no Input ao Focar */
+  .section#manageTestimonials input[type="text"]:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Estilo para o Botão de Adicionar Depoimento */
+  .section#manageTestimonials button[type="button"] {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .section#manageTestimonials button[type="button"]:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Estilos para a seção de Gerenciar Título e Conteúdo */
+  .section#manageContent {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .section#manageContent h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600; /* Font-weight mais forte */
+  }
+  
+  /* Estilo para o Formulário de Título e Conteúdo */
+  .section#manageContent form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Estilo para o Label (Título e Conteúdo) */
+  .section#manageContent label {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+  
+  /* Estilo para o Input de Título da Página */
+  .section#manageContent input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #333;
+    background-color: #f5f5f5;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  /* Efeito no Input de Título ao Focar */
+  .section#manageContent input[type="text"]:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Estilo para o Textarea de Conteúdo da Página */
+  .section#manageContent textarea {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #333;
+    background-color: #f5f5f5;
+    width: 100%;
+    min-height: 150px;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  /* Efeito no Textarea de Conteúdo ao Focar */
+  .section#manageContent textarea:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Estilo para o Botão de Atualizar Conteúdo */
+  .section#manageContent button[type="button"] {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  /* Estilos para a seção de Gerenciar URL do Vídeo */
+  .section#manageVideo {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .section#manageVideo h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Estilo para o Formulário de URL do Vídeo */
+  .section#manageVideo form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Estilo para o Label do Formulário de URL do Vídeo */
+  .section#manageVideo label {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 500;
+  }
+  
+  /* Estilo para o Input de URL do Vídeo */
+  .section#manageVideo input[type="url"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #333;
+    background-color: #f5f5f5;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  /* Efeito no Input de URL ao Focar */
+  .section#manageVideo input[type="url"]:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Estilo para o Botão de Atualizar URL */
+  .section#manageVideo button[type="button"] {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .section#manageVideo button[type="button"]:hover {
+    background-color: #2980b9;
+  }
+  
+  .section#manageVideo button[type="button"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+  }
+  
+  /* Estilo para o Contêiner do Vídeo */
+  .section#manageVideo .video-container {
+    margin-top: 30px;
+  }
+  
+  .section#manageVideo .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section#manageVideo iframe {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .section#manageContent button[type="button"]:hover {
+    background-color: #2980b9;
+  }
+  
+  .section#manageContent button[type="button"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4); /* Destaque ao focar */
+  }
+  
+  
+  /* Estilo para a lista de Depoimentos */
+  .testimonials-list {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .testimonials-list h3 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .testimonials-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .testimonials-list ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .testimonials-list ul li span {
+    font-size: 16px;
+    color: #2c3e50;
+  }
+  
+  .testimonials-list ul li button.remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .testimonials-list ul li button.remove-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Estilo de Validação para Depoimentos */
+  .section#manageTestimonials input:invalid {
+    border-color: #e74c3c;
+  }
+  
+  .section#manageTestimonials input:valid {
+    border-color: #2ecc71;
+  }
+  

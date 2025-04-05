@@ -9,12 +9,13 @@ html
 body
     .container
       .logo
-        img(src="/image/logo-ampla.png" alt="Logo da Empresa")
+        img(id="logo" src="/image/logo-ampla.png" alt="Logo da Empresa")
 
-      h1 🚀 Automatize Seu Negócio Agora!  
-      p Controle suas vendas, estoque e financeiro de forma fácil e rápida.  
+      h1(id="page-title") 🚀 Automatize Seu Negócio Agora!  
+      p(id="page-content") Controle suas vendas, estoque e financeiro de forma fácil e rápida.  
       div.map-container 
         iframe(
+          id="video"
           width="560"
           height="315"
           src="https://www.youtube.com/embed/MocEe0fy174?si=nkJQ_imJ8OPSOFSb"
@@ -29,18 +30,53 @@ body
 
       .benefits
         h2 ✅ Benefícios do Nosso Software  
-        ul
-          li 📊 Controle total das finanças  
-          li 🚀 Agilidade no atendimento  
-          li 🏪 Estoque sempre atualizado  
-          li 💰 Aumento de faturamento  
+        ul(id="benefits-list")
 
         .testimonials
             h2 💬 O que nossos clientes dizem?
             .testimonial
-              p#testimonial-text Depoimentos carregando...
+              p(id="testimonial-text") Depoimentos carregando...
 
       script.
+        async function loadConfigData() {
+          try {
+            const response = await fetch("/config");
+            const config = await response.json();
+            
+            if (config.logoUrl) {
+              document.getElementById("logo").src = config.logoUrl;
+            }
+
+            if (config.pageTitle) {
+              document.getElementById("page-title").textContent = config.pageTitle;
+            }
+
+            if (config.pageContent) {
+              document.getElementById("page-content").textContent = config.pageContent;
+            }
+
+            if (config.videoUrl) {
+              document.getElementById("video").src = config.videoUrl;
+            }
+
+            if (config.testimonial && config.testimonial.length > 0) {
+              document.getElementById("testimonial-text").innerText = config.testimonial[0];
+            }
+
+            if (config.benefits && config.benefits.length > 0) {
+              const benefitsList = document.getElementById("benefits-list");
+              config.benefits.forEach(benefit => {
+                const li = document.createElement("li");
+                li.textContent = benefit;
+                benefitsList.appendChild(li);
+              });
+            }
+          } catch (error) {
+            console.error("Erro ao carregar dados de configuração:", error);
+          }
+        }
+
+        window.onload = loadConfigData();
         // 🔹 Animação de Depoimentos Digitados
         const testimonials = [
           "Esse software mudou minha empresa! Agora tudo está mais organizado e eficiente.",
