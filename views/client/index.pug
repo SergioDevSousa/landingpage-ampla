@@ -1,153 +1,185 @@
 doctype html
-html
+html(lang="pt-BR")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Ampla TecServ
-    link(rel="stylesheet", href="/styles.css")
-  
-body
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css")
+    link(rel="stylesheet", href="/public/styles.css")
+
+body(class="gradient-background")
+  header.navbar.is-dark 
     .container
-      .logo
-        img(id="logo" src="/image/logo-ampla.png" alt="Logo da Empresa")
+      .navbar-brand
+        a.navbar-item(href="/")
+          img(src="/image/logo-ampla.png" alt="Logo" style="max-height: 3rem;")
+        //- Menu hamburguer (para mobile)
+        a.navbar-burger.burger(data-target="navbarMenu")
+          span
+          span
+          span
+      //- Links ou botões de navegação
+      .navbar-menu#navbarMenu
+        .navbar-end
+          a.navbar-item(href="#benefits-list") Benefícios
+          a.navbar-item(href="#contactForm") Contato
 
-      h1(id="page-title") 🚀 Automatize Seu Negócio Agora!  
-      p(id="page-content") Controle suas vendas, estoque e financeiro de forma fácil e rápida.  
-      div.map-container 
-        iframe(
-          id="video"
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/MocEe0fy174?si=nkJQ_imJ8OPSOFSb"
-          frameborder="0"
-          allowfullscreen)
-      .cta
-        form(id="contactForm" action )
-          input(type="text" name="nome" id="nome" placeholder="Seu Nome" required)
-          input(type="email" name="email" id="email" placeholder="seuemail@email.com" required)
-          input(type="tel" name="telefone" id="telefone" placeholder="(00)00000-0000" required)
-          button(type="submit") Enviar via Whatsapp!
+  .container.has-text-centered.mt-2
+    figure.image.is-128x128.is-inline-block
+      img(id="logo" src="/image/logo-ampla.png" alt="Logo da Empresa")
 
-      .benefits
-        h2 ✅ Benefícios do Nosso Software  
-        ul(id="benefits-list")
 
-        .testimonials
-            h2 💬 O que nossos clientes dizem?
-            .testimonial
-              p(id="testimonial-text") Depoimentos carregando...
+    h1#page-title.title.is-3.has-text-primary.mt-4 🚀 Automatize Seu Negócio Agora!  
+    p#page-content.subtitle.is-5.has-text-grey Controle suas vendas, estoque e financeiro de forma fácil e rápida.  
+    .section 
+      .container 
+        .map-container(style="max-width: 960px; margin: 0 auto;")
+          .video.is-16by9(style="width: 100%")
+            iframe#video(
+              src="https://www.youtube.com/embed/MocEe0fy174?si=nkJQ_imJ8OPSOFSb"
+              frameborder="0"
+              allowfullscreen
+              style="width: 500px; height: 350px;")
+    .section 
+      .container
+        h1.is-size-3.has-text-primary.has-text-weight-bold Entre em contato! 
+        .box(style="max-width: 500px; margin: 0 auto;")
+          form#contactForm
+            .field
+              label.label.has-text-left Nome
+              .control
+                input.input(type="text" name="nome" id="nome" placeholder="Seu Nome" required)
+            .field
+              label.label.has-text-left E-mail
+              .control
+                input.input(type="email" name="email" id="email" placeholder="seuemail@email.com" required)
+            .field
+              label.label.has-text-left Telefone
+              .control
+                input.input(type="tel" name="telefone" id="telefone" placeholder="(00)00000-0000" required)
+            .field.is-grouped.is-grouped-centered
+              .control
+                button.button.is-success(type="submit") Enviar via WhatsApp!
+    .benefits.section
+      h2.title.is-4 ✅ Benefícios do Nosso Software  
+      ul#benefits-list
 
-      script.
-        async function loadConfigData() {
-          try {
-            const response = await fetch("/config");
-            const config = await response.json();
-            
-            if (config.logoUrl) {
-              document.getElementById("logo").src = config.logoUrl;
-            }
-
-            if (config.pageTitle) {
-              document.getElementById("page-title").textContent = config.pageTitle;
-            }
-
-            if (config.pageContent) {
-              document.getElementById("page-content").textContent = config.pageContent;
-            }
-
-            if (config.videoUrl) {
-              document.getElementById("video").src = config.videoUrl;
-            }
-
-            if (config.testimonial && config.testimonial.length > 0) {
-              document.getElementById("testimonial-text").innerText = config.testimonial[0];
-            }
-
-            if (config.benefits && config.benefits.length > 0) {
-              const benefitsList = document.getElementById("benefits-list");
-              config.benefits.forEach(benefit => {
-                const li = document.createElement("li");
-                li.textContent = benefit;
-                benefitsList.appendChild(li);
-              });
-            }
-          } catch (error) {
-            console.error("Erro ao carregar dados de configuração:", error);
-          }
-        }
-
-        window.onload = loadConfigData();
-        // 🔹 Animação de Depoimentos Digitados
-        const testimonials = [
-          "Esse software mudou minha empresa! Agora tudo está mais organizado e eficiente.",
-          "A automação facilitou muito minha gestão financeira. Super recomendo!",
-          "Com esse sistema, economizei tempo e aumentei meu faturamento!"
-        ];
-
-        let index = 0;
-        let textIndex = 0;
-        let speed = 50; // Velocidade da digitação
-        let currentText = "";
-
-        function typeEffect() {
-          if (textIndex < testimonials[index].length) {
-            currentText += testimonials[index][textIndex];
-            document.getElementById("testimonial-text").innerHTML = currentText;
-            textIndex++;
-            setTimeout(typeEffect, speed);
-          } else {
-            setTimeout(nextTestimonial, 2000); // Espera 2s antes do próximo depoimento
-          }
-        }
-
-        function nextTestimonial() {
-          textIndex = 0;
-          currentText = "";
-          index = (index + 1) % testimonials.length;
-          document.getElementById("testimonial-text").innerHTML = "";
-          setTimeout(typeEffect, 500);
-        }
-
-        typeEffect(); // Inicia a animação
-
+    .testimonials.section
+      h2.title.is-3 💬 O que nossos clientes dizem?
+      .testimonial.notification 
+        p#testimonial-text Depoimentos carregando...
 
     script.
-      document.getElementById("contactForm").addEventListener("submit", async function(event) {
-          event.preventDefault();
+      async function loadConfigData() {
+        try {
+          const response = await fetch("/config");
+          const config = await response.json();
 
-          let nome = document.getElementById("nome").value;
-          let email = document.getElementById("email").value;
-          let telefone = document.getElementById("telefone").value;
-
-          let formData = { nome, email, telefone };
-
-          try {
-              let response = await fetch("/enviar-email", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(formData)
-              });
-
-              let data = await response.json();
-              if (response.ok) {
-                  alert("E-mail enviado com sucesso!");
-                   // 🔹 Apagar os campos do formulário
-                  document.getElementById("contactForm").reset();
-
-                  let mensagem = `Olá, meu nome é ${nome}, meu e-mail é ${email} e meu telefone é ${telefone}. Gostaria de mais informações!`;
-                  let urlWhatsApp = `https://api.whatsapp.com/send?phone=5581994518370&text=${encodeURIComponent(mensagem)}`;
-                  window.open(urlWhatsApp, "_blank");
-              } else {
-                  alert("Erro: " + data.error);
-              }
-
-
-          } catch (error) {
-              console.error("Erro ao enviar:", error);
-              alert("Erro ao enviar mensagem. Tente novamente!");
+          if (config.logoUrl) {
+            document.getElementById("logo").src = config.logoUrl;
           }
-      
-      });
-      
-    footer
+
+          if (config.pageTitle) {
+            document.getElementById("page-title").textContent = config.pageTitle;
+          }
+
+          if (config.pageContent) {
+            document.getElementById("page-content").textContent = config.pageContent;
+          }
+
+          if (config.videoUrl) {
+            document.getElementById("video").src = config.videoUrl;
+          }
+
+          if (config.testimonial && config.testimonial.length > 0) {
+            document.getElementById("testimonial-text").innerText = config.testimonial[0];
+          }
+
+          if (config.benefits && config.benefits.length > 0) {
+            const benefitsList = document.getElementById("benefits-list");
+            config.benefits.forEach(benefit => {
+              const li = document.createElement("li");
+              li.textContent = benefit;
+              benefitsList.appendChild(li);
+            });
+          }
+        } catch (error) {
+          console.error("Erro ao carregar dados de configuração:", error);
+        }
+      }
+
+      window.onload = loadConfigData();
+      // 🔹 Animação de Depoimentos Digitados
+      const testimonials = [
+        "Esse software mudou minha empresa! Agora tudo está mais organizado e eficiente.",
+        "A automação facilitou muito minha gestão financeira. Super recomendo!",
+        "Com esse sistema, economizei tempo e aumentei meu faturamento!"
+      ];
+
+      let index = 0;
+      let textIndex = 0;
+      let speed = 50; // Velocidade da digitação
+      let currentText = "";
+
+      function typeEffect() {
+        if (textIndex < testimonials[index].length) {
+          currentText += testimonials[index][textIndex];
+          document.getElementById("testimonial-text").innerHTML = currentText;
+          textIndex++;
+          setTimeout(typeEffect, speed);
+        } else {
+          setTimeout(nextTestimonial, 2000); // Espera 2s antes do próximo depoimento
+        }
+      }
+
+      function nextTestimonial() {
+        textIndex = 0;
+        currentText = "";
+        index = (index + 1) % testimonials.length;
+        document.getElementById("testimonial-text").innerHTML = "";
+        setTimeout(typeEffect, 500);
+      }
+
+      typeEffect(); // Inicia a animação
+
+
+  script.
+    document.getElementById("contactForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      let nome = document.getElementById("nome").value;
+      let email = document.getElementById("email").value;
+      let telefone = document.getElementById("telefone").value;
+
+      let formData = { nome, email, telefone };
+
+      try {
+        let response = await fetch("/enviar-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+
+        let data = await response.json();
+        if (response.ok) {
+          alert("E-mail enviado com sucesso!");
+            // 🔹 Apagar os campos do formulário
+          document.getElementById("contactForm").reset();
+
+          let mensagem = `Olá, meu nome é ${nome}, meu e-mail é ${email} e meu telefone é ${telefone}. Gostaria de mais informações!`;
+          let urlWhatsApp = `https://api.whatsapp.com/send?phone=5581994518370&text=${encodeURIComponent(mensagem)}`;
+          window.open(urlWhatsApp, "_blank");
+        } else {
+          alert("Erro: " + data.error);
+        }
+
+
+      } catch (error) {
+        console.error("Erro ao enviar:", error);
+        alert("Erro ao enviar mensagem. Tente novamente!");
+      }
+
+    });
+
+  footer.footer.has-text-centered.mt-2
         p © 2025 - Ampla TecServ | Todos os direitos reservados.

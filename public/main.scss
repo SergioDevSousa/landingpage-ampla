@@ -1,0 +1,55 @@
+$primary: #3273dc;
+$info: #209cee;
+$success: #23d100;
+$warning: #ffdd57;
+$danger: #ff3860;
+
+$family-sans-serif: 'Segoe UI', sans-serif;
+$body-background-color: #f5f5f5;
+
+@use '../node_modules/bulma/bulma';
+
+body {
+  background-color: $body-background-color;
+  font-family: $family-sans-serif;
+}
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.button {
+  &.is-primary {
+    background-color: $primary;
+    border-color: $primary;
+  }
+  &.is-info {
+    background-color: $info;
+    border-color: $info;
+  }
+  &.is-success {
+    background-color: $success;
+    border-color: $success;
+  }
+  &.is-warning {
+    background-color: $warning;
+    border-color: $warning;
+  }
+  &.is-danger {
+    background-color: $danger;
+    border-color: $danger;
+  }
+}
+
+.footer {
+  background-color: $primary;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+

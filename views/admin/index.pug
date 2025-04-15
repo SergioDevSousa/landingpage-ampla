@@ -1,51 +1,56 @@
 doctype html
 html(lang="pt-BR")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Ampla Admin Panel
-        link(rel="stylesheet", href="/styles.css")
-        link(rel="stylesheet", href="/admin.css")
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js")
-    body
-      .wrapper
-        .sidebar
-          .logo
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Admin Panel
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css")
+    link(rel="stylesheet", href="")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js")
+  body.has-background-light 
+    .columns.is-gapless 
+      .column.is-one-fifth.has-background-link.p-4 
+        .menu.m-4
+          .logo 
             img(src="/image/logo-ampla.png", alt="Logo da Empresa")
-          ul
-            li
-              a(href="#manageLogo") Gerenciar Logo
-            li
-              a(href="#manageVideo") Gerenciar Video
-            li
-              a(href="#manageTestimonials") Gerenciar Depoimentos
-            li
-              a(href="#manageBenefits") Gerenciar Benefícios
-            li
-              a(href="#manageContent") Gerenciar Título e Conteúdo
-            li
-              a(href="/") Voltar ao site do cliente
-        
-        .main-content
-          .header
-            h1 Painel de Administração
-            p Gerencie as informações do seu site aqui
-          .content
-            .section(id="dashboard")
-                h2 Dashboard
-                p Aqui você pode ver um resumo das informações do seu site.
-            .section(id="manageLogo")
+          .menu-label.has-text-white Menu 
+          .menu-list
+          ul 
+            li.mb-5
+              a.has-text-white(href="#manageLogo") Gerenciar Logo
+            li.mb-5
+              a.has-text-white(href="#manageVideo") Gerenciar Vídeo
+            li.mb-5
+              a.has-text-white(href="#manageTestimonials") Depoimentos
+            li.mb-5
+              a.has-text-white(href="#manageBenefits") Benefícios
+            li.mb-5
+              a.has-text-white(href="#manageContent") Conteúdo
+            li.mb-5
+              a.has-text-white(href="/") Voltar ao site
+
+      .main-content
+        .header
+          h1.title.is-3.has-text-centered.mt-5 Painel de Administração
+          p.has-text-centered(style="line-height: 0;") Gerencie as informações do seu site aqui
+        .content
+          //- .section(id="dashboard")
+          //-     h2 Dashboard
+          //-     p Aqui você pode ver um resumo das informações do seu site.
+          .section(id="manageLogo")
+            .box(style="max-width: 600px; margin: 0 auto;")
               h2 Gerenciar Logo
               form(action="javascript:void(0);")
                 label(for="logo-url") URL da Imagem do Logo
                 input(type="url" name="logo-url" id="logo-url" placeholder="URL da Imagem do Logo" value=config.logoUrl required)
-                button(type="button" id="update-logo-btn" onclick="updateLogo()") Atualizar Logo
-            .section(id="manageVideo")
+                button.button.is-link(type="button" id="update-logo-btn" onclick="updateLogo()") Atualizar Logo
+          .section(id="manageVideo")
+            .box(style="max-width: 600px; margin: 0 auto;")
               h2 Gerenciar URL do Video
               form(action="javascript:void(0);")
                 label(for="video-url") URL do Video Promocional (YouTube)
                 input(type="url" name="video-url" id="video-url" placeholder="URL do Vídeo" value=config.videoUrl required)
-                button(type="button" id="update-video-btn" onclick="updateVideoUrl()") Atualizar Video
+                button.button.is-link(type="button" id="update-video-btn" onclick="updateVideoUrl()") Atualizar Video
               .video-container
                 h3 Vídeo Atual
                 div.map-container
@@ -56,139 +61,143 @@ html(lang="pt-BR")
                     frameborder="0"
                     allowfullscreen
                   )
-            .section(id="manageTestimonials")
+          .section(id="manageTestimonials")
+            .box(style="max-width: 600px; margin: 0 auto;")
               h2 Gerenciar Depoimentos
               form(action="javascript:void(0);")
                 label(for="testimonial") Novo Depoimento
                 input(type="text" name="testimonial" id="testimonial" placeholder="Digite o depoimento" required)
-                button(type="button" id="add-testimonial-btn" onclick="addTestimonial()") Adicionar Depoimento
+                button.button.is-link(type="button" id="add-testimonial-btn" onclick="addTestimonial()") Adicionar Depoimento
               .testimonials-list
                 h3 Depoimentos atuais
                 ul
                   each testimonial in config.testimonial
                     li
                       span= testimonial
-                      button(
+                      button.button.is-danger(
                         type="button"
                         class="remove-btn"
                         onclick=`removeTestimonial("${testimonial.replace(/"/g, '\\"')}")`
                       ) Remover
-            .section(id="manageBenefits")
+          .section(id="manageBenefits")
+            .box(style="max-width: 600px; margin: 0 auto;")
               h2 Gerenciar Benefícios
               form(action="javascript:void(0);")
                 label(for="benefit") Novo Benefício
                 input(type="text" name="benefit" id="benefit" placeholder="Digite o benefício" required)
-                button(type="button" id="add-benefit-btn" onclick="addBenefit()") Adicionar Depoimento
+                button.button.is-link(type="button" id="add-benefit-btn" onclick="addBenefit()") Adicionar Depoimento
               .benefits-list
                 h3 Benefícios atuais
                 ul
                   each benefit in config.benefits
                     li
                       span=benefit
-                      button(type="button" class="remove-btn" onclick=`removeBenefit("${benefit.replace(/"/g, '\\"')}")`) Remover
-            
-            .section(id="manageContent")
+                      button.button.is-danger(type="button" class="remove-btn" onclick=`removeBenefit("${benefit.replace(/"/g, '\\"')}")`) Remover
+
+          .section(id="manageContent")
+            .box(style="max-width: 600px; margin: 0 auto;")
               h2 Gerenciar Título e Conteúdo
               form(action="javascript:void(0);")
                 label(for="page-title") Título da Página
                 input(type="text" name="page-title" id="page-title" placeholder="Digite o título da página" value=config.pageTitle required)
                 label(for="page-content") Conteúdo da Página
                 textarea(name="page-content" id="page-content" placeholder="Digite o conteúdo da página" required)=config.pageContent 
-                button(type="button" id="update-content-btn" onclick="updateContent()") Atualizar Conteúdo
-        
-        footer
-            p © 2025 - Ampla TecServ | Todos os direitos reservados.
-    script.
-      function addTestimonial() {
-        const testimonial = document.getElementById('testimonial').value;
-        axios.post('/add-testimonial', { testimonial })
+                button.button.is-link(type="button" id="update-content-btn" onclick="updateContent()") Atualizar Conteúdo
+
+      footer.footer.has-background-link.has-text-centered.has-text-white.p-4
+        p © 2025 - Ampla TecServ | Todos os direitos reservados.
+
+  script.
+    function addTestimonial() {
+      const testimonial = document.getElementById('testimonial').value;
+      axios.post('/add-testimonial', { testimonial })
+        .then(response => {
+          alert(response.data.message);
+          window.location.reload();
+        })
+        .catch(error => {
+          alert('Erro ao adicionar depoimento');
+          console.error(error);
+        });
+    }
+
+    function removeTestimonial(testimonial) {
+      if (confirm('Tem certeza que deseja remover este depoimento?')) {
+        axios.post('/remove-testimonial', { testimonial })
           .then(response => {
             alert(response.data.message);
             window.location.reload();
           })
           .catch(error => {
-            alert('Erro ao adicionar depoimento');
+            alert('Erro ao remover depoimento');
             console.error(error);
           });
       }
+    }
 
-      function removeTestimonial(testimonial) {
-        if (confirm('Tem certeza que deseja remover este depoimento?')) {
-            axios.post('/remove-testimonial', { testimonial })
-                .then(response => {
-                    alert(response.data.message);
-                    window.location.reload();
-                })
-                .catch(error => {
-                    alert('Erro ao remover depoimento');
-                    console.error(error);
-                });
-        }
-      }
+      function addBenefit() {
+      const benefit = document.getElementById('benefit').value;
+      axios.post('/add-benefit', { benefit })
+        .then(response => {
+          alert(response.data.message);
+          window.location.reload();
+        })
+        .catch(error => {
+          alert('Erro ao adicionar benefício');
+          console.error(error);
+        });
+    }
 
-        function addBenefit() {
-        const benefit = document.getElementById('benefit').value;
-        axios.post('/add-benefit', { benefit })
+    function removeBenefit(benefit) {
+      if (confirm('Tem certeza que deseja remover este benefício?')) {
+        axios.post('/remove-benefit', { benefit })
           .then(response => {
             alert(response.data.message);
             window.location.reload();
           })
           .catch(error => {
-            alert('Erro ao adicionar benefício');
+            alert('Erro ao remover benefício');
             console.error(error);
           });
       }
+    }
 
-      function removeBenefit(benefit) {
-        if (confirm('Tem certeza que deseja remover este benefício?')) {
-          axios.post('/remove-benefit', { benefit })
-            .then(response => {
-              alert(response.data.message);
-              window.location.reload();
-            })
-            .catch(error => {
-              alert('Erro ao remover benefício');
-              console.error(error);
-            });
-        }
-      }
+    function updateVideoUrl() {
+      const videoUrl = document.getElementById('video-url').value;
+      axios.post('/update-video-url', { videoUrl })
+        .then(response => {
+          alert(response.data.message);
+          document.querySelector('.map-container iframe').src = videoUrl;
+        })
+        .catch(error => {
+          alert('Erro ao atualizar URL do vídeo');
+          console.error(error);  
+        })
+    }
 
-      function updateVideoUrl() {
-        const videoUrl = document.getElementById('video-url').value;
-        axios.post('/update-video-url', { videoUrl })
-          .then(response => {
-            alert(response.data.message);
-            document.querySelector('.map-container iframe').src = videoUrl;
-          })
-          .catch(error => {
-            alert('Erro ao atualizar URL do vídeo');
-            console.error(error);  
-          })
-      }
+    function updateLogo() {
+      const logoUrl = document.getElementById('logo-url').value;
+      axios.post('/update-logo', { logoUrl })
+        .then(response => {
+          alert(response.data.message);
+          window.location.reload();
+        })
+        .catch(error => {
+          alert('Erro ao atualizar URL do Logo');
+          console.error(error);  
+        })
+    }
 
-      function updateLogo() {
-        const logoUrl = document.getElementById('logo-url').value;
-        axios.post('/update-logo', { logoUrl })
-          .then(response => {
-            alert(response.data.message);
-            window.location.reload();
-          })
-          .catch(error => {
-            alert('Erro ao atualizar URL do Logo');
-            console.error(error);  
-          })
-      }
-
-      function updateContent() {
-        const title = document.getElementById('page-title').value;
-        const content = document.getElementById('page-content').value;
-        axios.post('/update-content', { title, content })
-          .then(response => {
-            alert(response.data.message);
-            window.location.reload();
-          })
-          .catch(error => {
-            alert('Erro ao atualizar título e conteúdo');
-            console.error(error);
-          });
-      }
+    function updateContent() {
+      const title = document.getElementById('page-title').value;
+      const content = document.getElementById('page-content').value;
+      axios.post('/update-content', { title, content })
+        .then(response => {
+          alert(response.data.message);
+          window.location.reload();
+        })
+        .catch(error => {
+          alert('Erro ao atualizar título e conteúdo');
+          console.error(error);
+        });
+    }
