@@ -12,6 +12,7 @@
   "scripts": {
     "build-css": "sass ./public/main.scss:./public/styles.css",
     "watch-css": "sass --watch ./public/main.scss:./public/styles.css",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "pug views -o dist && cp -r public dist/"
   }
 }
